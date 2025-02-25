@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">carta virtual</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="titulo">In forno</string>
+    <string name="sedes">conoce nuestras ubicaciones</string>
+    <string name="menu">conoce nuestros productos</string>
+    <string name="reserva">reserva</string>
+</resources>

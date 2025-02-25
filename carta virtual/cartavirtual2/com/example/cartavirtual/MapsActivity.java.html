@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>MapsActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #5f826b; font-style: italic;}
+.s5 { color: #2aacb8;}
+.s6 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MapsActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">cartavirtual</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">androidx</span><span class="s2">.</span><span class="s1">fragment</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">FragmentActivity</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">android</span><span class="s2">.</span><span class="s1">os</span><span class="s2">.</span><span class="s1">Bundle</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">CameraUpdateFactory</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">GoogleMap</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">OnMapReadyCallback</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">SupportMapFragment</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">model</span><span class="s2">.</span><span class="s1">LatLng</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">android</span><span class="s2">.</span><span class="s1">gms</span><span class="s2">.</span><span class="s1">maps</span><span class="s2">.</span><span class="s1">model</span><span class="s2">.</span><span class="s1">MarkerOptions</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">cartavirtual</span><span class="s2">.</span><span class="s1">databinding</span><span class="s2">.</span><span class="s1">ActivityMapsBinding</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">MapsActivity </span><span class="s0">extends </span><span class="s1">FragmentActivity </span><span class="s0">implements </span><span class="s1">OnMapReadyCallback </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">GoogleMap mMap</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">ActivityMapsBinding binding</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">Bundle savedInstanceState</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">onCreate</span><span class="s2">(</span><span class="s1">savedInstanceState</span><span class="s2">);</span>
+
+        <span class="s1">binding </span><span class="s2">= </span><span class="s1">ActivityMapsBinding</span><span class="s2">.</span><span class="s1">inflate</span><span class="s2">(</span><span class="s1">getLayoutInflater</span><span class="s2">());</span>
+        <span class="s1">setContentView</span><span class="s2">(</span><span class="s1">binding</span><span class="s2">.</span><span class="s1">getRoot</span><span class="s2">());</span>
+
+        <span class="s3">// Obtain the SupportMapFragment and get notified when the map is ready to be used.</span>
+        <span class="s1">SupportMapFragment mapFragment </span><span class="s2">= (</span><span class="s1">SupportMapFragment</span><span class="s2">) </span><span class="s1">getSupportFragmentManager</span><span class="s2">()</span>
+                <span class="s2">.</span><span class="s1">findFragmentById</span><span class="s2">(</span><span class="s1">R</span><span class="s2">.</span><span class="s1">id</span><span class="s2">.</span><span class="s1">map</span><span class="s2">);</span>
+        <span class="s1">mapFragment</span><span class="s2">.</span><span class="s1">getMapAsync</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s4">/**</span>
+     <span class="s4">* Manipulates the map once available.</span>
+     <span class="s4">* This callback is triggered when the map is ready to be used.</span>
+     <span class="s4">* This is where we can add markers or lines, add listeners or move the camera. In this case,</span>
+     <span class="s4">* we just add a marker near Sydney, Australia.</span>
+     <span class="s4">* If Google Play services is not installed on the device, the user will be prompted to install</span>
+     <span class="s4">* it inside the SupportMapFragment. This method will only be triggered once the user has</span>
+     <span class="s4">* installed Google Play services and returned to the app.</span>
+     <span class="s4">*/</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onMapReady</span><span class="s2">(</span><span class="s1">GoogleMap googleMap</span><span class="s2">) {</span>
+        <span class="s1">mMap </span><span class="s2">= </span><span class="s1">googleMap</span><span class="s2">;</span>
+
+        <span class="s3">// Add a marker in Sydney and move the camera</span>
+        <span class="s1">LatLng Laureles </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LatLng</span><span class="s2">(</span><span class="s5">6.2545968</span><span class="s2">, -</span><span class="s5">75.6144256</span><span class="s2">);</span>
+        <span class="s1">LatLng Medellin </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LatLng</span><span class="s2">(</span><span class="s5">6.244197</span><span class="s2">, -</span><span class="s5">75.6636136</span><span class="s2">);</span>
+        <span class="s1">LatLng Poblado </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LatLng</span><span class="s2">(</span><span class="s5">6.2093316</span><span class="s2">, -</span><span class="s5">75.5702626</span><span class="s2">);</span>
+        <span class="s1">LatLng Centro </span><span class="s2">= </span><span class="s0">new </span><span class="s1">LatLng</span><span class="s2">(</span><span class="s5">6.2093316</span><span class="s2">, -</span><span class="s5">75.5702626</span><span class="s2">);</span>
+        <span class="s3">//creacion de marcadores para cada sede</span>
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">addMarker</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MarkerOptions</span><span class="s2">().</span><span class="s1">position</span><span class="s2">(</span><span class="s1">Medellin</span><span class="s2">).</span><span class="s1">title</span><span class="s2">(</span><span class="s6">&quot;Marker in Medellin&quot;</span><span class="s2">));</span>
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">addMarker</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MarkerOptions</span><span class="s2">().</span><span class="s1">position</span><span class="s2">(</span><span class="s1">Laureles</span><span class="s2">).</span><span class="s1">title</span><span class="s2">(</span><span class="s6">&quot;Marker in laureles&quot;</span><span class="s2">));</span>
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">addMarker</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MarkerOptions</span><span class="s2">().</span><span class="s1">position</span><span class="s2">(</span><span class="s1">Poblado</span><span class="s2">).</span><span class="s1">title</span><span class="s2">(</span><span class="s6">&quot;Marker in poblado&quot;</span><span class="s2">));</span>
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">addMarker</span><span class="s2">(</span><span class="s0">new </span><span class="s1">MarkerOptions</span><span class="s2">().</span><span class="s1">position</span><span class="s2">(</span><span class="s1">Centro</span><span class="s2">).</span><span class="s1">title</span><span class="s2">(</span><span class="s6">&quot;Marker in centro&quot;</span><span class="s2">));</span>
+
+
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">moveCamera</span><span class="s2">(</span><span class="s1">CameraUpdateFactory</span><span class="s2">.</span><span class="s1">newLatLng</span><span class="s2">(</span><span class="s1">Medellin</span><span class="s2">));</span>
+        <span class="s1">mMap</span><span class="s2">.</span><span class="s1">setMapType</span><span class="s2">(</span><span class="s1">GoogleMap</span><span class="s2">.</span><span class="s1">MAP_TYPE_TERRAIN</span><span class="s2">);</span>
+        <span class="s3">//mMap.</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
